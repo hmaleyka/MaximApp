@@ -11,10 +11,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
-    options.Password.RequireDigit = true;
+    options.Password.RequireDigit = false;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
+    options.Password.RequireUppercase = true;
     options.Password.RequiredLength = 6;
     options.User.AllowedUserNameCharacters= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 }).AddEntityFrameworkStores<AppDbContext>()

@@ -44,11 +44,12 @@ namespace MaximApp.Controllers
             var result = await _userManager.CreateAsync(user , register.Password);
             if (!result.Succeeded)
             {
-                foreach (var item in result.Errors)
+                foreach (var error in result.Errors)
                 {
                    
-                    ModelState.AddModelError(string.Empty, "the password requirements are at least one uppercase one digit and one special chracaters");
+                    ModelState.AddModelError("", error.Description);
                 }           
+                return View();
             }
             await _userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
             return RedirectToAction("Login");

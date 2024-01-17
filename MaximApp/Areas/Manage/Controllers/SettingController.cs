@@ -31,7 +31,7 @@ namespace MaximApp.Areas.Manage.Controllers
             Setting setting = _context.settings.Where(x => x.Id == id).SingleOrDefault();
             return View(setting);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Update(int id, Setting setting)
         {

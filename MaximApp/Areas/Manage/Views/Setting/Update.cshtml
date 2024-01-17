@@ -1,8 +1,6 @@
 ﻿@using MaximApp.Models;
-
 @model Setting
 
-<h2>Update </h2>
 <div class="container">
     <form method="post">
         <div class="form-group">
@@ -12,10 +10,9 @@
         </div>
         <div class="form-group">
             <label asp-for="Value">Value</label>
-            <input asp-for="Value" class="form-control" placeholder="Description">
+            <input asp-for="Value" class="form-control" placeholder="Value">
             <span asp-validation-for="Value" style="color:red"></span>
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
