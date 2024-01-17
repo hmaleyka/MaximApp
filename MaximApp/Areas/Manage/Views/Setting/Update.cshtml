@@ -1,0 +1,21 @@
+﻿@using MaximApp.Models;
+
+@model Setting
+
+<h2>Update </h2>
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Key">Key</label>
+            <input asp-for="Key" class="form-control" placeholder="Key">
+            <span asp-validation-for="Key" style="color:red"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Value">Value</label>
+            <input asp-for="Value" class="form-control" placeholder="Description">
+            <span asp-validation-for="Value" style="color:red"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

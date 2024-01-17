@@ -31,6 +31,10 @@ namespace MaximApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateServicesVM servicesvm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             Services services = new Services()
             {
                 Name = servicesvm.Name,
@@ -57,8 +61,12 @@ namespace MaximApp.Areas.Manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Update (int id,UpdateServicesVM servicesvm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             Services service = _context.services.FirstOrDefault(x => x.Id == id);
-             service.Name = servicesvm.Name;
+            service.Name = servicesvm.Name;
             service.Description = servicesvm.Description;
             service.Icon = servicesvm.Icon;
 

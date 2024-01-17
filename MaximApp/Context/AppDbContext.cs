@@ -11,5 +11,6 @@ namespace MaximApp.Context
 
         }
         public DbSet<Services> services { get; set; }
+        public DbSet<Setting> settings { get; set; }
     }
 }

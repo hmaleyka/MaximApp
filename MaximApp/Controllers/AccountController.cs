@@ -46,7 +46,8 @@ namespace MaximApp.Controllers
             {
                 foreach (var item in result.Errors)
                 {
-                    ModelState.AddModelError("", item.Description);
+                   
+                    ModelState.AddModelError(string.Empty, "the password requirements are at least one uppercase one digit and one special chracaters");
                 }           
             }
             await _userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
@@ -60,13 +61,15 @@ namespace MaximApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginvm)
         {
-            AppUser user = await _userManager.FindByEmailAsync(loginvm.EmailOrUsername);
+            var user = await _userManager.FindByEmailAsync(loginvm.EmailOrUsername);
             if(user == null)
             {
                 user = await _userManager.FindByNameAsync(loginvm.EmailOrUsername);
                 if(user is null)
                 {
-                    throw new Exception("the username-email or password is incorrect");
+                    ModelState.AddModelError("", " username or password is incorrect");
+                    return View();
+
                 }
             }
 
@@ -74,11 +77,12 @@ namespace MaximApp.Controllers
 
             if(!result.Succeeded)
             {
-                throw new Exception("the username-email or password is incorrect");
+                ModelState.AddModelError("", "username or password is incorrect");
+                return View();
             }
             if(result.IsLockedOut)
             {
-                throw new Exception("try it again after a few minutes");
+                ModelState.AddModelError(string.Empty, "try it after a few minutes");
             }
 
             await _signInManager.SignInAsync(user, false);
