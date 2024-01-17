@@ -21,6 +21,7 @@ namespace MaximApp.Controllers
             HomeVM homeVM = new HomeVM()
             {
                services=_context.services.ToList(),
+               settings = _context.settings.ToList(),
             };
             return View(homeVM);
         }

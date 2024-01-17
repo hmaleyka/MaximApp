@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using MaximApp.ViewModels;
+
+@model HomeVM
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -106,8 +110,15 @@
                             <p>
                                 A108 Adam Street <br>
                                 NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                               @foreach (var item in Model.settings)
+                                {
+                                    <strong>@item.Key:</strong> @item.Value
+
+                                    <br>
+                                    <strong>@item.Key:</strong>
+                                    @item.Value
+                                <br>
+                                                    }
                             </p>
                             <div class="social-links mt-3">
                                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>

@@ -6,5 +6,6 @@ namespace MaximApp.ViewModels
     {
 
         public List<Services> services { get; set; }
+        public List<Setting> settings { get; set; }
     }
 }
