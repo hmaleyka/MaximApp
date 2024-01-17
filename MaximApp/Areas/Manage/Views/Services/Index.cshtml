@@ -24,7 +24,8 @@
                 <th scope="row">@count</th>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
-                <td>@item.Icon</td>
+                <td>
+                     @item.Icon
                 <td>
                     <a class="btn btn-warning"  asp-controller="Services" asp-action="Update" asp-route-id="@item.Id">Update</a>
                     <a class="btn btn-danger"  asp-controller="Services" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
