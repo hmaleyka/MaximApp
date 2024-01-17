@@ -1,0 +1,37 @@
+﻿@using MaximApp.Models;
+@model List<Services>
+@{
+    int count = 0;
+}
+<div style="margin-left:50px">
+    <a class="btn btn-primary" asp-controller="Services" asp-action="Create" >Create</a>
+</div>
+<div class="container">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Icon(url)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Icon</td>
+                <td>
+                    <a class="btn btn-warning"  asp-controller="Services" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <a class="btn btn-danger"  asp-controller="Services" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,24 @@
+﻿@using MaximApp.Areas.ViewModels;
+
+@model UpdateServicesVM
+<h2>Update </h2>
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Name">
+            <span asp-validation-for="Name" style="color:red"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" class="form-control" placeholder="Description">
+            <span asp-validation-for="Description" style="color:red"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Icon">Icon</label>
+            <input asp-for="Icon" class="form-control" placeholder="Example;icon-box icon-box-black">
+            <span asp-validation-for="Icon" style="color:red"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
