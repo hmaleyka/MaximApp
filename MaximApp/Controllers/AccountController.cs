@@ -1,4 +1,5 @@
 ﻿using MaximApp.Context;
+using MaximApp.Helpers;
 using MaximApp.Models;
 using MaximApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -48,7 +49,7 @@ namespace MaximApp.Controllers
                     ModelState.AddModelError("", item.Description);
                 }           
             }
-            //await _userManager.AddToRoleAsync(user, )
+            await _userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
             return RedirectToAction("Login");
         }
 
@@ -88,6 +89,24 @@ namespace MaximApp.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> CreateRole()
+        {
+            foreach (UserRole item in Enum.GetValues(typeof(UserRole)))
+            {
+
+               if(await _roleManager.FindByNameAsync(item.ToString()) == null)                      
+               {
+                    await _roleManager.CreateAsync(new IdentityRole()
+                    {
+                        Name = item.ToString(),
+                    });
+                }
+            }
+
+            return RedirectToAction("Index", "Home");   
+           
         }
 
     }

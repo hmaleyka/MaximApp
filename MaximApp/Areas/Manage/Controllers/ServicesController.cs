@@ -1,11 +1,13 @@
 ﻿using MaximApp.Areas.ViewModels;
 using MaximApp.Context;
 using MaximApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaximApp.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [AutoValidateAntiforgeryToken]
     public class ServicesController : Controller
     {
         private readonly AppDbContext _context;
@@ -14,16 +16,18 @@ namespace MaximApp.Areas.Manage.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<Services> services = _context.services.ToList();
             return View(services);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateServicesVM servicesvm)
         {
@@ -37,7 +41,7 @@ namespace MaximApp.Areas.Manage.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Update (int id)
         {
             var services = _context.services.Where(x => x.Id == id).SingleOrDefault();
@@ -49,6 +53,7 @@ namespace MaximApp.Areas.Manage.Controllers
             };
             return View (vm);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Update (int id,UpdateServicesVM servicesvm)
         {
@@ -60,7 +65,7 @@ namespace MaximApp.Areas.Manage.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)       
         { 
             Services services = _context.services.FirstOrDefault(x=>x.Id == id);
